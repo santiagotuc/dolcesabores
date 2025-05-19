@@ -7,7 +7,6 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-left">
         <Link to="/" className="navbar-logo">
-          {/* Aquí irá tu logo cuando lo tengas */}
           <span>Dulce Sabores</span>
         </Link>
         <ul className="navbar-links">
