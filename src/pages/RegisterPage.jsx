@@ -20,7 +20,7 @@ const RegisterPage = () => {
 
     if (!email.trim()) {
       validationErrors.email = "Por favor, ingresa tu correo electrónico.";
-    } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+    } else if (!/^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/.test(email)) {
       validationErrors.email =
         "Por favor, ingresa un correo electrónico válido.";
     }
