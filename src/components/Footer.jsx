@@ -36,10 +36,10 @@ function Footer() {
           <ul>
             <li>
               Correo electrónico:{" "}
-              <a href="mailto:tu_correo@ejemplo.com">tu_correo@ejemplo.com</a>
+              <a href="mailto:tu_correo@ejemplo.com">correo@ejemplo.com</a>
             </li>
             <li>
-              Teléfono: <a href="tel:+5491112345678">+54 9 11 1234-5678</a>
+              Teléfono: <a href="tel:+5491112345678">+54 9 381 111 1111</a>
             </li>
           </ul>
         </div>

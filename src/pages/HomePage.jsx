@@ -9,13 +9,13 @@ import ReviewCard from "../components/ReviewCard"; // Importa el componente Revi
 function HomePage() {
   const reviews = [
     {
-      author: "María Eugenia",
+      author: "Santiago Molina",
       rating: 5,
       text: "¡Delicioso todo! La torta de chocolate es increíble.",
     },
     {
-      author: "Ricardo Montovani",
-      rating: 4,
+      author: "Vicky acuña",
+      rating: 5,
       text: "Excelente pastelería, muy buena calidad y atención.",
     },
     // Añade más reseñas aquí
@@ -45,7 +45,8 @@ function HomePage() {
           </div>
           <h3>ENVÍOS</h3>
           <p>
-            Hacemos envíos a domicilio a todo CABA o podes retirar en Villa Luro
+            Hacemos envíos a domicilio a todo Tafi Viejo, San Miguel de Tucumán
+            y Yerba Buena
           </p>
         </div>
         <div className="info-block">
@@ -75,19 +76,19 @@ function HomePage() {
           <div className="product-card">
             <img src={Product1Image} alt="Producto 1" />
             <h3>Torta de Chocolate</h3>
-            <p className="price">$45.00</p>
+            <p className="price">$28000.00</p>
             <button className="add-to-cart">Agregar al carrito</button>
           </div>
           <div className="product-card">
             <img src={Product2Image} alt="Producto 2" />
-            <h3>Cheesecake de Frutos Rojos</h3>
-            <p className="price">$50.00</p>
+            <h3>Torta de Frutos Rojos</h3>
+            <p className="price">$21000.00</p>
             <button className="add-to-cart">Agregar al carrito</button>
           </div>
           <div className="product-card">
             <img src={Product3Image} alt="Producto 3" />
-            <h3>Macarons Surtidos</h3>
-            <p className="price">$25.00</p>
+            <h3>Torta de chocolate 2</h3>
+            <p className="price">$25000.00</p>
             <button className="add-to-cart">Agregar al carrito</button>
           </div>
           {/* Puedes añadir más productos aquí */}
