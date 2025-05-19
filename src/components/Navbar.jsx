@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ShoppingCart, User, LogOut, LogIn } from "lucide-react";
+import { ShoppingCart, User, LogOut, LogIn, Menu } from "lucide-react"; // Importa el icono de Menu
 import "./Navbar.css";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Estado para controlar la visibilidad del menú móvil
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,18 +27,37 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-brand">
         <Link to="/" className="navbar-title">
           Dulce Sabores
         </Link>
+        <button className="hamburger-button" onClick={toggleMobileMenu}>
+          {" "}
+          {/* Botón hamburguesa */}
+          <Menu className="icon" />
+        </button>
       </div>
-      <div className="navbar-menu">
-        <Link to="/" className="navbar-item">
+      <div className={`navbar-menu ${isMobileMenuOpen ? "open" : ""}`}>
+        {" "}
+        {/* Clase 'open' para mostrar el menú */}
+        <Link
+          to="/"
+          className="navbar-item"
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
           Inicio
         </Link>
-        <Link to="/products" className="navbar-item">
+        <Link
+          to="/products"
+          className="navbar-item"
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
           Productos
         </Link>
         {isLoggedIn ? (
@@ -45,11 +65,19 @@ const Navbar = () => {
             <span className="navbar-item">
               Hola, {user?.fullName || "Usuario"}
             </span>
-            <Link to="/cart" className="navbar-item navbar-cart">
+            <Link
+              to="/cart"
+              className="navbar-item navbar-cart"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               <ShoppingCart className="icon" />
               Carrito
             </Link>
-            <Link to="/profile" className="navbar-item">
+            <Link
+              to="/profile"
+              className="navbar-item"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               <User className="icon" />
               Perfil
             </Link>
@@ -63,11 +91,19 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="navbar-menu-right">
-            <Link to="/login" className="navbar-item navbar-login">
+            <Link
+              to="/login"
+              className="navbar-item navbar-login"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               <LogIn className="icon" />
               Iniciar sesión
             </Link>
-            <Link to="/register" className="navbar-item">
+            <Link
+              to="/register"
+              className="navbar-item"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               Regístrate
             </Link>
           </div>
@@ -76,4 +112,5 @@ const Navbar = () => {
     </nav>
   );
 };
+
 export default Navbar;
