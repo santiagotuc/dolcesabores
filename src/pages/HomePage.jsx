@@ -4,7 +4,22 @@ import HeroImage from "../images/p-image-placeholder.jpg";
 import Product1Image from "../images/product1-placeholder.jpg"; // Importa la imagen del producto 1
 import Product2Image from "../images/product2-placeholder.jpg"; // Importa la imagen del producto 2
 import Product3Image from "../images/product3-placeholder.jpg"; // Importa la imagen del producto 3
+import ReviewCard from "../components/ReviewCard"; // Importa el componente ReviewCard
+
 function HomePage() {
+  const reviews = [
+    {
+      author: "María Eugenia",
+      rating: 5,
+      text: "¡Delicioso todo! La torta de chocolate es increíble.",
+    },
+    {
+      author: "Ricardo Montovani",
+      rating: 4,
+      text: "Excelente pastelería, muy buena calidad y atención.",
+    },
+    // Añade más reseñas aquí
+  ];
   return (
     <div className="home-page">
       {/* Sección de la imagen principal */}
@@ -76,6 +91,21 @@ function HomePage() {
             <button className="add-to-cart">Agregar al carrito</button>
           </div>
           {/* Puedes añadir más productos aquí */}
+        </div>
+      </section>
+
+      {/* Sección de reseñas */}
+      <section className="customer-reviews">
+        <h2>Lo que dicen nuestros clientes</h2>
+        <div className="reviews-container">
+          {reviews.map((review, index) => (
+            <ReviewCard
+              key={index}
+              author={review.author}
+              rating={review.rating}
+              text={review.text}
+            />
+          ))}
         </div>
       </section>
 

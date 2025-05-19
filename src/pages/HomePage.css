@@ -1,8 +1,3 @@
-/* pages/HomePage.css */
-.home-page {
-  /* Estilos generales de la página de inicio */
-}
-
 /* Estilos de la sección principal (hero) */
 .hero-section {
   background-size: cover;
@@ -134,4 +129,23 @@
 
 .product-card .add-to-cart:hover {
   background-color: #0056b3;
+}
+
+/* Estilos para la sección de reseñas de clientes */
+.customer-reviews {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #f0f0f0; /* Un fondo gris más claro */
+}
+
+.customer-reviews h2 {
+  font-size: 2em;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.reviews-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
 }
