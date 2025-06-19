@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ShoppingCart, User, LogOut, LogIn, Menu } from "lucide-react"; // Importa el icono de Menu
-import "./Navbar.css";
+// Importamos componentes de React-Bootstrap
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
+// Todavía usaremos estos iconos si quieres mantenerlos
+import { ShoppingCart, User, LogOut, LogIn } from "react-feather";
+// Ya no necesitamos Navbar.css porque Bootstrap manejará la mayoría de los estilos
+// import "./Navbar.css";
 
-const Navbar = () => {
+const AppNavbar = () => {
+  // Renombrado a AppNavbar para evitar conflicto con el componente de Bootstrap
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Estado para controlar la visibilidad del menú móvil
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,90 +31,86 @@ const Navbar = () => {
     navigate("/login");
   };
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
   return (
-    <nav className="navbar">
-      <div className="navbar-brand">
-        <Link to="/" className="navbar-title">
-          Dulce Sabores
-        </Link>
-        <button className="hamburger-button" onClick={toggleMobileMenu}>
-          {" "}
-          {/* Botón hamburguesa */}
-          <Menu className="icon" />
-        </button>
-      </div>
-      <div className={`navbar-menu ${isMobileMenuOpen ? "open" : ""}`}>
+    // <nav className="navbar"> original
+    <Navbar bg="light" expand="lg" sticky="top" className="shadow-sm">
+      {" "}
+      {/* bg, expand, sticky son props de Bootstrap */}
+      <Container>
         {" "}
-        {/* Clase 'open' para mostrar el menú */}
-        <Link
-          to="/"
-          className="navbar-item"
-          onClick={() => setIsMobileMenuOpen(false)}
-        >
-          Inicio
-        </Link>
-        <Link
-          to="/products"
-          className="navbar-item"
-          onClick={() => setIsMobileMenuOpen(false)}
-        >
-          Productos
-        </Link>
-        {isLoggedIn ? (
-          <div className="navbar-menu-right">
-            <span className="navbar-item">
-              Hola, {user?.fullName || "Usuario"}
-            </span>
-            <Link
-              to="/cart"
-              className="navbar-item navbar-cart"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <ShoppingCart className="icon" />
-              Carrito
-            </Link>
-            <Link
-              to="/profile"
-              className="navbar-item"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <User className="icon" />
-              Perfil
-            </Link>
-            <button
-              onClick={handleLogout}
-              className="navbar-item navbar-logout"
-            >
-              <LogOut className="icon" />
-              Cerrar sesión
-            </button>
-          </div>
-        ) : (
-          <div className="navbar-menu-right">
-            <Link
-              to="/login"
-              className="navbar-item navbar-login"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <LogIn className="icon" />
-              Iniciar sesión
-            </Link>
-            <Link
-              to="/register"
-              className="navbar-item"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Regístrate
-            </Link>
-          </div>
-        )}
-      </div>
-    </nav>
+        {/* Envuelve el contenido para centrarlo y limitar el ancho */}
+        <Navbar.Brand as={Link} to="/" className="fw-bold fs-3 text-dark">
+          Dolce Sabores
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />{" "}
+        {/* Botón hamburguesa */}
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            {" "}
+            {/* Alinea los items a la izquierda */}
+            <Nav.Link as={Link} to="/">
+              Inicio
+            </Nav.Link>
+            <Nav.Link as={Link} to="/products">
+              Productos
+            </Nav.Link>
+            {/* Si quieres agregar un dropdown de categorías, sería aquí: */}
+            {/* <NavDropdown title="Categorías" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/categoria/tortas">Tortas</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/categoria/galletas">Galletas</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item as={Link} to="/categoria/especiales">Especiales</NavDropdown.Item>
+            </NavDropdown> */}
+          </Nav>
+          <Nav>
+            {isLoggedIn ? (
+              <>
+                <Navbar.Text className="me-3">
+                  Hola, {user?.fullName || "Usuario"}
+                </Navbar.Text>
+                {/* ¡ENLACE AL CARRITO! */}
+                <Nav.Link
+                  as={Link}
+                  to="/cart"
+                  className="d-flex align-items-center me-3"
+                >
+                  <ShoppingCart size={20} className="me-1" /> Carrito
+                </Nav.Link>
+                {/* ¡NUEVO ENLACE AL PERFIL! */}
+                <Nav.Link
+                  as={Link}
+                  to="/profile"
+                  className="d-flex align-items-center me-3"
+                >
+                  <User size={20} className="me-1" /> Perfil
+                </Nav.Link>
+                <Button
+                  variant="danger"
+                  onClick={handleLogout}
+                  className="d-flex align-items-center"
+                >
+                  <LogOut size={20} className="me-1" /> Cerrar sesión
+                </Button>
+              </>
+            ) : (
+              <>
+                <Nav.Link
+                  as={Link}
+                  to="/login"
+                  className="d-flex align-items-center me-3"
+                >
+                  <LogIn size={20} className="me-1" /> Iniciar sesión
+                </Nav.Link>
+                <Nav.Link as={Link} to="/register">
+                  Regístrate
+                </Nav.Link>
+              </>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 
-export default Navbar;
+export default AppNavbar;

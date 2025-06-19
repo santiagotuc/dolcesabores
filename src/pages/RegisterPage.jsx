@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./RegisterPage.css"; // Importa el archivo CSS para los estilos
+import { useNavigate, Link } from "react-router-dom";
+// Importamos componentes de React-Bootstrap
+import { Form, Button, Container, Card } from "react-bootstrap";
+// Ya no necesitamos la mayoría de los estilos de RegisterPage.css
+// import "./RegisterPage.css"; // Esto puede eliminarse o reducirse a solo lo esencial
 
 const RegisterPage = () => {
   const [fullName, setFullName] = useState("");
@@ -59,93 +62,95 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="register-page">
-      <div className="register-container">
-        <div className="register-header">
-          <h2 className="register-title">Regístrate</h2>
-          <p className="register-subtitle">
-            Crea una cuenta para acceder a todas las funciones.
-          </p>
-        </div>
-        <form className="register-form" onSubmit={handleSubmit}>
-          <div className="form-control">
-            <label htmlFor="fullName" className="form-label">
-              Nombre Completo
-            </label>
-            <input
-              type="text"
-              id="fullName"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              className="form-input"
-              placeholder="Tu nombre completo"
-            />
-            {errors.fullName && (
-              <div className="register-error">{errors.fullName}</div>
-            )}
+    <Container
+      className="d-flex justify-content-center align-items-center"
+      style={{ minHeight: "80vh", backgroundColor: "#f0f0f0", padding: "20px" }}
+    >
+      <Card
+        className="p-4 shadow-sm"
+        style={{ width: "400px", maxWidth: "100%", borderRadius: "12px" }}
+      >
+        <Card.Body>
+          <div className="text-center mb-4">
+            <h2 className="fs-2 text-dark mb-2">Regístrate</h2>
+            <p className="text-secondary fs-6">
+              Crea una cuenta para acceder a todas las funciones.
+            </p>
           </div>
-          <div className="form-control">
-            <label htmlFor="email" className="form-label">
-              Correo Electrónico
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="form-input"
-              placeholder="Tu correo electrónico"
-            />
-            {errors.email && (
-              <div className="register-error">{errors.email}</div>
-            )}
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="formFullName">
+              <Form.Label>Nombre Completo</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Tu nombre completo"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                isInvalid={!!errors.fullName} // Muestra el estilo de error si hay un error
+              />
+              <Form.Control.Feedback type="invalid">
+                {" "}
+                {/* Mensaje de error de Bootstrap */}
+                {errors.fullName}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formEmail">
+              <Form.Label>Correo Electrónico</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Tu correo electrónico"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                isInvalid={!!errors.email}
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.email}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formPassword">
+              <Form.Label>Contraseña</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Tu contraseña"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                isInvalid={!!errors.password}
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.password}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className="mb-4" controlId="formConfirmPassword">
+              <Form.Label>Confirmar Contraseña</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Confirma tu contraseña"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                isInvalid={!!errors.confirmPassword}
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.confirmPassword}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Button variant="success" type="submit" className="w-100 py-2">
+              Registrarme
+            </Button>
+          </Form>
+          <div className="text-center mt-3">
+            <p>
+              ¿Ya tienes una cuenta?{" "}
+              <Link to="/login" className="text-decoration-none text-primary">
+                Inicia sesión
+              </Link>
+            </p>
           </div>
-          <div className="form-control">
-            <label htmlFor="password" className="form-label">
-              Contraseña
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="form-input"
-              placeholder="Tu contraseña"
-            />
-            {errors.password && (
-              <div className="register-error">{errors.password}</div>
-            )}
-          </div>
-          <div className="form-control">
-            <label htmlFor="confirmPassword" className="form-label">
-              Confirmar Contraseña
-            </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="form-input"
-              placeholder="Confirma tu contraseña"
-            />
-            {errors.confirmPassword && (
-              <div className="register-error">{errors.confirmPassword}</div>
-            )}
-          </div>
-          <button type="submit" className="register-button">
-            Registrarme
-          </button>
-        </form>
-        <div className="register-footer">
-          <p>
-            ¿Ya tienes una cuenta?{" "}
-            <a href="/login" className="register-footer-link">
-              Inicia sesión
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
+        </Card.Body>
+      </Card>
+    </Container>
   );
 };
 

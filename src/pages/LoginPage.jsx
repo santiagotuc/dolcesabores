@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "./LoginPage.css";
+// Importamos componentes de React-Bootstrap
+import { Form, Button, Container, Alert, Card } from "react-bootstrap";
+// Ya no necesitamos la mayoría de los estilos de LoginPage.css
+// import "./LoginPage.css"; // Esto puede eliminarse o reducirse a solo lo esencial
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -24,61 +27,74 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-page">
-      <div className="login-container">
-        <div className="login-header">
-          <h2 className="login-title">Iniciar Sesión</h2>
-          <p className="login-subtitle">
-            Inicia sesión para acceder a tu cuenta.
-          </p>
-        </div>
-        <form className="login-form" onSubmit={handleSubmit}>
-          {error && <div className="login-error">{error}</div>}
-          <div className="form-control">
-            <label htmlFor="email" className="form-label">
-              Correo Electrónico
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="form-input"
-              placeholder="Tu correo electrónico"
-            />
+    <Container
+      className="d-flex justify-content-center align-items-center"
+      style={{ minHeight: "80vh", backgroundColor: "#f0f0f0", padding: "20px" }}
+    >
+      <Card
+        className="p-4 shadow-sm"
+        style={{ width: "400px", maxWidth: "100%", borderRadius: "12px" }}
+      >
+        <Card.Body>
+          <div className="text-center mb-4">
+            <h2 className="fs-2 text-dark mb-2">Iniciar Sesión</h2>
+            <p className="text-secondary fs-6">
+              Inicia sesión para acceder a tu cuenta.
+            </p>
           </div>
-          <div className="form-control">
-            <label htmlFor="password" className="form-label">
-              Contraseña
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="form-input"
-              placeholder="Tu contraseña"
-            />
-          </div>
-          <button type="submit" className="login-button">
-            Iniciar Sesión
-          </button>
-        </form>
-        <div className="login-footer">
-          <a href="/forgot-password" className="login-footer-link">
-            ¿Olvidaste tu contraseña?
-          </a>
-          <p>
-            ¿No tienes una cuenta?{" "}
-            <Link to="/register" className="login-footer-link">
-              Regístrate
+          <Form onSubmit={handleSubmit}>
+            {error && <Alert variant="danger">{error}</Alert>}{" "}
+            {/* Componente Alert para errores */}
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              {" "}
+              {/* mb-3 para margen inferior */}
+              <Form.Label>Correo Electrónico</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Tu correo electrónico"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-4" controlId="formBasicPassword">
+              {" "}
+              {/* mb-4 para margen inferior */}
+              <Form.Label>Contraseña</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Tu contraseña"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Button variant="success" type="submit" className="w-100 py-2">
+              {" "}
+              {/* w-100 para ancho completo, py-2 para padding vertical */}
+              Iniciar Sesión
+            </Button>
+          </Form>
+          <div className="text-center mt-3">
+            <Link
+              to="/forgot-password"
+              className="text-decoration-none text-primary"
+            >
+              ¿Olvidaste tu contraseña?
             </Link>
-          </p>
-        </div>
-      </div>
-    </div>
+            <p className="mt-2">
+              ¿No tienes una cuenta?{" "}
+              <Link
+                to="/register"
+                className="text-decoration-none text-primary"
+              >
+                Regístrate
+              </Link>
+            </p>
+          </div>
+        </Card.Body>
+      </Card>
+    </Container>
   );
 };
 
