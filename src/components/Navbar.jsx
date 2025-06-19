@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-// Importamos componentes de React-Bootstrap
-import { Navbar, Nav, Container, Button } from "react-bootstrap";
-// Todavía usaremos estos iconos si quieres mantenerlos
-import { ShoppingCart, User, LogOut, LogIn } from "react-feather";
-// Ya no necesitamos Navbar.css porque Bootstrap manejará la mayoría de los estilos
-// import "./Navbar.css";
+import { useNavigate, Link } from "react-router-dom";
+import { Navbar, Nav, Button, Container } from "react-bootstrap";
+import { ShoppingCart, LogIn, LogOut, User } from "react-feather";
+
+// ¡NUEVO! Importa tu imagen de logo
+import logoImage from "../images/logodolce.png";
 
 const AppNavbar = () => {
-  // Renombrado a AppNavbar para evitar conflicto con el componente de Bootstrap
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -26,41 +24,34 @@ const AppNavbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("cartItems"); // Opcional: limpiar carrito al cerrar sesión
     setIsLoggedIn(false);
     setUser(null);
-    navigate("/login");
+    navigate("/"); // Redirigir a la página de inicio
   };
 
   return (
-    // <nav className="navbar"> original
     <Navbar bg="light" expand="lg" sticky="top" className="shadow-sm">
-      {" "}
-      {/* bg, expand, sticky son props de Bootstrap */}
       <Container>
-        {" "}
-        {/* Envuelve el contenido para centrarlo y limitar el ancho */}
-        <Navbar.Brand as={Link} to="/" className="fw-bold fs-3 text-dark">
-          Dolce Sabores
+        {/* ¡MODIFICADO! Usamos la imagen en lugar del texto */}
+        <Navbar.Brand as={Link} to="/">
+          <img
+            src={logoImage}
+            alt="Logo Dolce Sabores"
+            height="70" // Ajusta la altura según sea necesario
+            className="d-inline-block align-top"
+          />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />{" "}
-        {/* Botón hamburguesa */}
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            {" "}
-            {/* Alinea los items a la izquierda */}
             <Nav.Link as={Link} to="/">
               Inicio
             </Nav.Link>
             <Nav.Link as={Link} to="/products">
               Productos
             </Nav.Link>
-            {/* Si quieres agregar un dropdown de categorías, sería aquí: */}
-            {/* <NavDropdown title="Categorías" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/categoria/tortas">Tortas</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/categoria/galletas">Galletas</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/categoria/especiales">Especiales</NavDropdown.Item>
-            </NavDropdown> */}
+            {/* Si tienes Categorías, considera un NavDropdown aquí */}
           </Nav>
           <Nav>
             {isLoggedIn ? (
@@ -68,7 +59,6 @@ const AppNavbar = () => {
                 <Navbar.Text className="me-3">
                   Hola, {user?.fullName || "Usuario"}
                 </Navbar.Text>
-                {/* ¡ENLACE AL CARRITO! */}
                 <Nav.Link
                   as={Link}
                   to="/cart"
@@ -76,7 +66,6 @@ const AppNavbar = () => {
                 >
                   <ShoppingCart size={20} className="me-1" /> Carrito
                 </Nav.Link>
-                {/* ¡NUEVO ENLACE AL PERFIL! */}
                 <Nav.Link
                   as={Link}
                   to="/profile"
