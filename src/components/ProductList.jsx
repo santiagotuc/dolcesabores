@@ -2,32 +2,43 @@ import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 // Asegúrate que las rutas de imágenes estén correctas
-import product1 from "../images/product1-placeholder.jpg";
-import product2 from "../images/product2-placeholder.jpg";
+import product1 from "../tartainvertidaricota.png";
+import product2 from "../images/tartadolce.png";
 import product3 from "../images/product3-placeholder.jpg";
+import product4 from "../images/MarquisseBrownie.png";
 
 function ProductList() {
   const products = [
     {
       id: "prod1",
-      name: "Torta Selva Negra",
-      price: "25000",
+      name: "Ricota",
+      price: "15.000",
       image: product1,
-      description: "Clásica torta con capas de chocolate y crema.",
+      description: "Tarta invertida de ricota y crema",
     },
     {
       id: "prod2",
-      name: "Galletas de Mantequilla",
-      price: "8500",
+      name: "Tarta Dolce",
+      price: "14.500",
       image: product2,
-      description: "Deliciosas galletas artesanales, ideales para el café.",
+      description:
+        "Base de brownie con una ligera capa de ddl, cubierta en una mousse de chocolate con nueces y trozos de brownie.",
     },
     {
       id: "prod3",
-      name: "Cheesecake de Frutos Rojos",
-      price: "30000",
+      name: "Lemon Pie",
+      price: "13.600",
       image: product3,
-      description: "Cremoso cheesecake con un toque ácido de frutos rojos.",
+      description:
+        "Clásico lemon pie con masa sablé, crema de limón y merengue suizo🍋🧁",
+    },
+    {
+      id: "prod4",
+      name: "Marquisse Brownie",
+      price: "12.600",
+      image: product4,
+      description:
+        "Base de brownie de 18cm, con un colchonzo de ddl y crema chantilly, coronado con reducción de frutos rojos y frutillas🤤🍓",
     },
   ];
 
