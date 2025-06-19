@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 // Asegúrate que las rutas de imágenes estén correctas
-import product1 from "../tartainvertidaricota.png";
+import product1 from "../images/tartainvertidaricota.png";
 import product2 from "../images/tartadolce.png";
 import product3 from "../images/product3-placeholder.jpg";
 import product4 from "../images/MarquisseBrownie.png";
